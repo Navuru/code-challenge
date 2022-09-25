@@ -5,39 +5,47 @@ import AccountContainer from "./AccountContainer";
 function App() {
 
   const [transactions,setTransactions] = useState([])
-
-  const handleAddTransaction = (transaction) => {
-     // to note transaction to transactions
-    setTransactions([...transactions,transaction])
-  }
-
-  const handleSearch = (search) => {
-    if (search) {
-      const searchItem = transactions.filter(() => {
-        // to note transaction to transactions
-        if (transactions.description === searchItem){
-          return true;
-        } else { 
-          return false;
-        }
-      });
-      setTransactions(searchItem)
-    }
-  }
+  let [searchState, setSearchState] = useState(false)
 
   useEffect(() => {
-    // const res = 
-    fetch("http://localhost:8001/transactions")
-    .then((res) => res.json())
-    // const data = res.json();
-    .then((data) => {
-      setTransactions(data);
-    });
+    fetchTransactions()
+  },[searchState])
+
+
+    const fetchTransactions = async () => {
+        const res = await fetch("http://localhost:8001/transactions")
+        const jsonRes = await res.json()
+        console.log(jsonRes)
+          setTransactions(jsonRes);
+        
+      };
     
-  },[])
+  const handleAddTransaction = (transaction) => {
 
+     console.log("transaction: ", transaction)
+    setTransactions([...transactions,transaction]);
+  };
 
+  const handleSearch = (search) => {
+    console.log(search)
 
+    if(search === ""){
+      console.log("load all")
+      setSearchState(!searchState)
+    }
+
+    let filteredTransactions = transactions.filter((transaction)=>{
+      if(transaction.description.toString().startsWith(search)){
+        return transaction
+      }
+    })
+
+    setTransactions(filteredTransactions)
+
+  
+  }
+
+  
   return (
     <div className="ui raised segment">
       <div className="ui segment violet inverted">

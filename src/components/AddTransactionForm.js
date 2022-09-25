@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 // import { header } from "server/reply";
 
-function AddTransactionForm() {
+function AddTransactionForm({handleAddTransaction}) {
 
   const [formData,setFormData] = useState({
     date:"",
@@ -10,14 +10,11 @@ function AddTransactionForm() {
     amount:""
   })
 
-  const handlePostTransaction = (e) => {
+  const handlePostTransaction = async (e) => {
     e.preventDefault();
     console.log(formData)
 
-  }
-
-  // const res = 
-  fetch(" http://localhost:8001/transactions",{
+  const res = await fetch(" http://localhost:8001/transactions",{
     method: "POST",
     headers : {
       "Content-Type": "application/json",
@@ -31,15 +28,16 @@ function AddTransactionForm() {
   });
 
 
-  // const data = res.json();
-  // const handleAddTransaction = () =>{
-  //   setFormData({
-  //     date:"",
-  //     description:"",
-  //     category:"",
-  //     amount:"",
-  //   })
-  // }
+  const data = res.json();
+
+  handleAddTransaction (data)
+    setFormData({
+      date:"",
+      description:"",
+      category:"",
+      amount:"",
+    })
+  }
   
 
   function handleChange(event) {

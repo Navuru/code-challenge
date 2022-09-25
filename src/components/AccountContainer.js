@@ -9,7 +9,7 @@ function AccountContainer({handleSearch,handleAddTransaction,transactions}) {
   return (
     <div>
       <Search handleSearch={handleSearch}/>
-      <AddTransactionForm handleAddTransaction={handleAddTransaction}/>
+      <AddTransactionForm handleAddTransaction={handleAddTransaction} transactions={transactions}/>
       <TransactionsList transactions={transactions} />
     </div>
   );

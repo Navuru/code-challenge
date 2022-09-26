@@ -85,49 +85,32 @@
       "amount": -975
     },
     {
-      "date": [
-        "2022-08-31"
-      ],
-      "description": [
-        "Tickets"
-      ],
-      "category": [
-        "Transportation"
-      ],
-      "amount": [
-        "2000"
-      ],
+      "date": "2022-09-15",
+      "description": "Cook",
+      "category": "Restaurant",
+      "amount": "5",
       "id": 13
     },
     {
-      "date": [
-        "2022-09-08"
-      ],
-      "description": [
-        "Cook"
-      ],
-      "category": [
-        "Transportation"
-      ],
-      "amount": [
-        "60"
-      ],
+      "date": "2022-09-09",
+      "description": "Tickets",
+      "category": "Transportation",
+      "amount": "10",
       "id": 14
     },
     {
-      "date": [
-        "2022-09-08"
-      ],
-      "description": [
-        "Cook"
-      ],
-      "category": [
-        "Restaurant"
-      ],
-      "amount": [
-        "6777"
-      ],
+      "date": "2022-09-15",
+      "description": "Tickets",
+      "category": "Transportation",
+      "amount": "67",
       "id": 15
+    },
+    {
+      "date": "2022-09-14",
+      "description": "Cook",
+      "category": "bsdzxgsg",
+      "amount": "1.21",
+      "id": 16
     }
   ]
 }

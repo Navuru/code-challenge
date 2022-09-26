@@ -14,34 +14,44 @@ function AddTransactionForm({handleAddTransaction}) {
     e.preventDefault();
     console.log(formData)
 
-  const res = await fetch(" http://localhost:8001/transactions",{
-    method: "POST",
-    headers : {
-      "Content-Type": "application/json",
-    },
-    body : JSON.stringify({
-          date:formData.date,
-          description:formData.description,
-          category:formData.category,
-          amount:formData.amount
-    }),
-  });
+    const res = await fetch(" http://localhost:8001/transactions",{
+      method: "POST",
+      headers : {
+        "Content-Type": "application/json",
+      },
+      body : JSON.stringify({
+            date:formData.date,
+            description:formData.description,
+            category:formData.category,
+            amount:formData.amount
+      }),
+    }).then(r=>r.json()).then(data=>{
 
+      //const data = res.json();
 
-  const data = res.json();
+      console.log("some data", data);
+  
+      handleAddTransaction(data)
 
-  handleAddTransaction (data)
-    setFormData({
-      date:"",
-      description:"",
-      category:"",
-      amount:"",
     })
+
+
+  
+
+
+      setFormData({
+        date:"",
+        description:"",
+        category:"",
+        amount:"",
+      })
   }
   
 
-  function handleChange(event) {
-    setFormData({...formData,[event.target.name] : [event.target.value]});
+  function handleChange(name, value) {
+    
+    setFormData({...formData, [name]:value});
+    console.log(formData)
   }
 
 
@@ -57,7 +67,7 @@ function AddTransactionForm({handleAddTransaction}) {
           <input
            type="date" 
            name="date" 
-           onChange={handleChange}
+           onChange={ (e)=>handleChange(e.target.name, e.target.value)}
            value={formData.date}
            />
 
@@ -65,7 +75,7 @@ function AddTransactionForm({handleAddTransaction}) {
            type="text" 
            name="description" 
            placeholder="Description" 
-           onChange={handleChange}
+           onChange={(e)=>handleChange(e.target.name, e.target.value)}
            value={formData.description}
            />
 
@@ -73,7 +83,7 @@ function AddTransactionForm({handleAddTransaction}) {
           type="text" 
           name="category" 
           placeholder="Category" 
-          onChange={handleChange}
+          onChange={(e)=>handleChange(e.target.name, e.target.value)}
           value={formData.category}
           />
           <input 
@@ -81,7 +91,7 @@ function AddTransactionForm({handleAddTransaction}) {
           name="amount" 
           placeholder="Amount" 
           step="0.01" 
-          onChange={handleChange}
+          onChange={(e)=>handleChange(e.target.name, e.target.value)}
           value={formData.amount}
           />
 

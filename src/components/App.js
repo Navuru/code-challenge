@@ -35,7 +35,7 @@ function App() {
     }
 
     let filteredTransactions = transactions.filter((transaction)=>{
-      if(transaction.description.toString().startsWith(search)){
+      if(transaction.description.toLowerCase().startsWith(search.toLowerCase())){
         return transaction
       }
     })
